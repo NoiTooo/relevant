@@ -1,0 +1,51 @@
+{% extends "register/base.html" %}
+{% block content %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>ユーザー名</th>
+            {% if user.account_name %}
+                <td>{{ user.account_name }}</td>
+            {% else %}
+                <td>{{ user.email }}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>姓</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>名</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>登録日</th>
+            <td>{{ user.date_joined|date:'Y年m月d日' }}</td>
+        </tr>
+        <tr>
+            <th>お気に入りの依頼者（{{ count_client }}）</th>
+            <td>
+                {% for person in r_client %}
+                    {% if person.clt_user.account_name %}
+                        {{ person.clt_user.account_name }}<hr>
+                    {% else %}
+                        {{ person.clt_user.email }}}<hr>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>お気に入りの相談相手（{{ count_adviser }}）</th>
+           <td>
+                {% for person in r_adviser %}
+                    {% if person.adv_user.account_name %}
+                        {{ person.adv_user.account_name }}<hr>
+                    {% else %}
+                        {{ person.adv_user.email }}<hr>
+                    {% endif %}
+                {% endfor %}
+            <td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

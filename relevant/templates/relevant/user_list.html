@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザーリスト</title>
+</head>
+<body>
+<tr>
+  {% for user in qs %}
+    <th>{{ user.id }}</th>
+    <td>{{ user.account_name }}</td>
+    <br>
+    <td>{{ user.first_name }}</td>
+    <td>{{ user.last_name }}</td>
+    <hr>
+  {% endfor %}
+
+  <form method="POST" action="{% url 'relevant:user_list' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="OK">
+</form>
+
+</tr>
+</body>
+</html>
